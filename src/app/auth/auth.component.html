@@ -1,0 +1,60 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>Firebase Auth</h4>
+    </div>
+    <div class="card">
+      <div class="card-body" *ngIf="!userDetails">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <div class="btn-group">
+              <button type="button" class="btn" [ngClass]="{'btn-primary
+                active': actionType == 'login' }"
+                      (click)="onValChange('login')"><strong>Login</strong></button>
+              <button type="button" class="btn" [ngClass]="{'btn-primary
+                active': actionType == 'register' }"
+                      (click)="onValChange('register')"><strong>Register</strong></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" [(ngModel)]="email"
+                 id="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control"
+                 [(ngModel)]="password" id="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <span *ngIf="actionType == 'login'; else elseBlock">
+            <button type="button" class="btn btn-primary" (click)="loginUser()">Log
+              In</button>
+          </span>
+          <ng-template #elseBlock>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control"
+                     [(ngModel)]="name" id="name" placeholder="Name">
+            </div>
+            <button type="button" class="btn btn-primary"
+                    (click)="registerUser()">Register
+            </button>
+          </ng-template>
+        </div>
+
+        <div class="form-group text-center">
+          <img src="../assets/img/googlebtn.png" alt="" srcset="" width="150"
+               (click)="googleLogin()">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-{{responseMessageType}}" role="alert"
+       *ngIf="responseMessage.length">
+    {{responseMessage}}
+  </div>
+</div>
+
